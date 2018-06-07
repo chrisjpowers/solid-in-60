@@ -47,13 +47,15 @@ class WelcomeEmail {
 class User {
   // ...
   renderWelcomeEmail() { new WelcomeEmail().render(this); }
-  isAuthenticatedBy(pw) { new UserAuth().isAuthenticatedBy(user, pw); }
+  isAuthenticatedBy(pw) {
+    return new UserAuth().isAuthenticatedBy(user.hashedPassword, pw);
+  }
   // ...
 }
 
 class UserAuth {
-  isAuthenticatedBy(user, pw) {
-    return UserAuth.hash(UserAuth.salt(pw)) === user.hashedPassword;
+  isAuthenticatedBy(hashedPw, pw) {
+    return UserAuth.hash(UserAuth.salt(pw)) === hashedPw;
   }
 
   static salt(str) { return `${str}-salted`; }
