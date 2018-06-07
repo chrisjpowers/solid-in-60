@@ -36,6 +36,7 @@ class MemberUser {
 	billingAddress() { ... }
 	hashedPassword() { ... }
 }
+
 class AdminUser {
 	constructor(user) { this.user = user; }
 	ldapUser() { ... }
