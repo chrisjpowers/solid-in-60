@@ -12,8 +12,16 @@ class FacebookLogin {
 class UserAuthController {
   login(user, pw) {
     let login = this.getLoginForUser(user);
-    return login.authenticate(pw) ?
-      {redirect: login.successPath} :
-      {redirect: "/login"};
+    if (login instanceof FacebookLogin) {
+      login.authenticate(pw, (err) => {
+        err ?
+          {redirect: "/login"} :
+          {redirect: login.successPath};
+      });
+    } else {
+      return login.authenticate(pw) ?
+        {redirect: login.successPath} :
+        {redirect: "/login"};
+    }
   }
 }
