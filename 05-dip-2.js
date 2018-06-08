@@ -9,6 +9,21 @@ class MemberLogin {
   }
 }
 
+class SecureHashedAuth {
+  isAuthenticatedBy(hashedPw, pw) {
+		let hashing = pw;
+		for (var i; i < 100; i++) {
+			hashing = SecureHashedAuth.hash(hashing);
+		}
+    return hashing === hashedPw;
+	}
+	static hash(str) { ... }
+}
+
+class TestHashedAuth {
+  isAuthenticatedBy(hashedPw, pw) { return true; }
+}
+
 class LousyHashedAuth {
   isAuthenticatedBy(hashedPw, pw) {
     return LousyHashedAuth.hash(LousyHashedAuth.salt(pw)) === hashedPw;
