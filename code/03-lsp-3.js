@@ -4,7 +4,7 @@ class UserAuthController {
     let rejectionPath = login.getRejectionPath();
     if (rejectionPath) return {redirect: rejectionPath};
 
-    if (login.authenicateAsync) {
+    if (login.authenticateAsync) {
       login.authenticateAsync(pw, (err) => {
         !err ?
           {redirect: login.successPath} :
